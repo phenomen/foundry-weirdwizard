@@ -1,0 +1,12 @@
+{
+	"name": "foundry-weirdwizard",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+	  "dev": "tailwindcss -i ./styles/tailwind.css -o ./styles/weirdwizard.css --watch",
+	  "build": "tailwindcss -i ./styles/tailwind.css -o ./styles/weirdwizard.css"
+	},
+	"devDependencies": {
+		"tailwindcss": "^3.3.3"
+	}
+}

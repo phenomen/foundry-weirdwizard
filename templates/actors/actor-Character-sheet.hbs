@@ -1,96 +1,96 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="{{cssClass}} font-sans flex flex-col" autocomplete="off">
 
-    <header class="sheet-header">{{!-- Sheet Header --}}
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "WW.ActorName"}}"/></h1>
-            <div class="attributes grid grid-4col">{{!-- Attributes --}}
+    <header >{{!-- Sheet Header --}}
+        <img  src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="{{actor.name}}" class="w-32 h-32 rounded-full object-cover object-center border-2 border-ww-purple hover:border-ww-silver"/>
+        <div >
+            <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "WW.ActorName"}}" class="!font-serif !text-3xl"/>
+            <div >{{!-- Attributes --}}
                 {{#each system.attributes as |attribute key|}}
-                <div class="attribute stat flex-group-center">
-                    <label for="system.attributes.{{key}}.value" class="attribute-label">{{attribute.label}}</label>
-                    <div class="stat flex-group-center">
+                <div >
+                    <label for="system.attributes.{{key}}.value" >{{attribute.label}}</label>
+                    <div >
                         <input type="number" name="system.attributes.{{key}}.value" value="{{attribute.value}}" min="0" data-dtype="Number"/>
-                        <a class="attribute-mod rollable" data-roll="d20+@attributes.{{key}}.mod[modifier]@boons[boons]" data-label="{{attribute.label}}" title="Roll {{attribute.label}}">{{numberFormat attribute.mod decimals=0 sign=true}}</a>
+                        <a  data-roll="d20+@attributes.{{key}}.mod[modifier]@boons[boons]" data-label="{{attribute.label}}" title="Roll {{attribute.label}}">{{numberFormat attribute.mod decimals=0 sign=true}}</a>
                     </div>
                 </div>
                 {{/each}}
             </div>
-            <div class="resources grid grid-4col">
-                <div class="stat flex-group-center">{{!-- Defense --}}
-                    <label for="system.stats.defense.total" class="resource-label">{{localize "WW.Defense"}}</label>
-                    <div>{{system.stats.defense.total}} <a class="defense-edit" title="Edit Defense"><i class="fas fa-edit"></i></a></div>  
+            <div >
+                <div >{{!-- Defense --}}
+                    <label for="system.stats.defense.total" >{{localize "WW.Defense"}}</label>
+                    <div>{{system.stats.defense.total}} <a  title="Edit Defense"><i ></i></a></div>  
                 </div>
-                <div class="stat flex-group-center">{{!-- Damage / Health --}}
-                    <label for="system.stats.health.total" class="resource-label">{{localize "WW.Damage"}} / {{localize "WW.Health.Title"}}</label>
-                    <div class="flex-row flex-group-center">
+                <div >{{!-- Damage / Health --}}
+                    <label for="system.stats.health.total" >{{localize "WW.Damage"}} / {{localize "WW.Health.Title"}}</label>
+                    <div >
                         <input type="number" name="system.stats.damage.value" value="{{system.stats.damage.value}}" min="0" data-dtype="Number"/>
-                        <span class"ml-1">/ {{system.stats.health.total}} <a class="health-edit" title="Edit Health"><i class="fas fa-edit"></i></a></span>
+                        <span class"ml-1">/ {{system.stats.health.total}} <a  title="Edit Health"><i ></i></a></span>
                     </div>
                 </div>
-                <div class="stat flex-group-center">{{!-- Bonus Damage --}}
-                    <label for="system.stats.bonusdamage.value" class="resource-label">{{localize "WW.BonusDamage"}}</label>
+                <div >{{!-- Bonus Damage --}}
+                    <label for="system.stats.bonusdamage.value" >{{localize "WW.BonusDamage"}}</label>
                     <div><input type="number" name="system.stats.bonusdamage.value" value="{{system.stats.bonusdamage.value}}" data-dtype="Number" min="0" placeholder="#" />d6</div>
                 </div>
-                <div class="stat flex-group-center">
+                <div >
                     <label>{{localize "WW.Luck"}}</label>
-                    <div><a class="rollable resource-label" title="Roll {{localize "WW.Luck"}}"><i class="large fas fa-dice-d20" data-label="Luck"></i></a></div>
+                    <div><a  title="Roll {{localize "WW.Luck"}}"><i  data-label="Luck"></i></a></div>
                 </div>
             </div>
         </div>
     </header>
 
-    <nav class="sheet-tabs tabs" data-group="primary">{{!-- Sheet Tab Navigation --}}
-        <a class="item" data-tab="summary">{{localize "WW.Summary"}}</a>
-        <a class="item" data-tab="stats">{{localize "WW.Stats"}}</a>
-        <a class="item" data-tab="details">{{localize "WW.Details"}}</a>
-        <a class="item" data-tab="equipment">{{localize "WW.Equipment"}}</a>
-        <a class="item" data-tab="talents">{{localize "WW.Talents"}}</a>
-        <a class="item" data-tab="spells">{{localize "WW.Spells"}}</a>
-        {{!--<a class="item" data-tab="afflictions">{{localize "WW.Afflictions"}}</a>--}}
-        <a class="item" data-tab="effects">{{localize "WW.Effects"}}</a>
+    <nav data-group="primary" class="sheet-tabs"> {{!-- Sheet Tab Navigation --}}
+        <a data-tab="summary">{{localize "WW.Summary"}}</a>
+        <a data-tab="stats">{{localize "WW.Stats"}}</a>
+        <a data-tab="details">{{localize "WW.Details"}}</a>
+        <a data-tab="equipment">{{localize "WW.Equipment"}}</a>
+        <a data-tab="talents">{{localize "WW.Talents"}}</a>
+        <a data-tab="spells">{{localize "WW.Spells"}}</a>
+        {{!--<a  data-tab="afflictions">{{localize "WW.Afflictions"}}</a>--}}
+        <a data-tab="effects">{{localize "WW.Effects"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Summary Tab --}}
-        <div class="tab summary" data-group="primary" data-tab="summary">
+        <div data-group="primary" data-tab="summary" class="tab summary">
             {{> "systems/weirdwizard/templates/actors/parts/Character-summary.hbs"}}
         </div>
 
         {{!-- Stats Tab --}}
-        <div class="tab stats" data-group="primary" data-tab="stats">
+        <div data-group="primary" data-tab="stats" class="tab stats">
             {{> "systems/weirdwizard/templates/actors/parts/Character-stats.hbs"}}
         </div>
 
         {{!-- Details Tab --}}
-        <div class="tab details" data-group="primary" data-tab="details">
+        <div data-group="primary" data-tab="details" class="tab details">
             {{> "systems/weirdwizard/templates/actors/parts/Character-details.hbs"}}
         </div>
 
         {{!-- Equipment Tab --}}
-        <div class="tab equipment" data-group="primary" data-tab="equipment">
+        <div data-group="primary" data-tab="equipment" class="tab equipment">
             {{> "systems/weirdwizard/templates/actors/parts/Character-equipment.hbs"}}
         </div>
 
         {{!-- Traits & Talents Tab --}}
-        <div class="tab talents" data-group="primary" data-tab="talents">
+        <div data-group="primary" data-tab="talents" class="tab talents">
             {{> "systems/weirdwizard/templates/actors/parts/Character-talents.hbs"}}
         </div>
 
         {{!-- Spells Tab --}}
-        <div class="tab spells" data-group="primary" data-tab="spells">
+        <div data-group="primary" data-tab="spells" class="tab spells">
             {{> "systems/weirdwizard/templates/actors/parts/Character-spells.hbs"}}
         </div>
 
         {{!-- Afflictions Tab --}}
-        {{!-- <div class="tab afflictions flexcol" data-group="primary" data-tab="afflictions">
+        {{!-- <div  data-group="primary" data-tab="afflictions">
             {{> "systems/weirdwizard/templates/actors/parts/Character-afflictions.hbs"}}
         </div>
         --}}
 
         {{!-- Active Effects Tab --}}
-        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+        <div data-group="primary" data-tab="effects" class="tab effects">
             {{> "systems/weirdwizard/templates/actors/parts/Character-effects.hbs"}}
         </div>
     </section>
