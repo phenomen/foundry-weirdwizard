@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 
 @tailwind components;
 @tailwind utilities;
 
-.weirdwizard *,
-::before,
-::after {
+:root {
+	--color-shadow-primary: #ffffff;
+	--color-shadow-highlight: #ffffff;
+}
+
+.weirdwizard * {
 	box-sizing: border-box;
-	border-width: 0;
-	border-style: solid;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -31,7 +32,7 @@
 .weirdwizard input[type='date'],
 .weirdwizard input[type='time'],
 .weirdwizard input[type='search'] {
-	@apply h-auto p-1.5 border-t-0 border-r-0 border-l-0 border-b border-ww-purple bg-white rounded-none font-sans font-bold text-ww-purple focus:bg-ww-purple focus:text-white;
+	@apply h-auto p-1.5 border-none rounded-md bg-white font-sans font-bold text-ww-purple focus:bg-ww-purple focus:text-white;
 }
 
 .weirdwizard input:focus,

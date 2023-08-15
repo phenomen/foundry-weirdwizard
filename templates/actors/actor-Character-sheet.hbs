@@ -1,41 +1,81 @@
 <form class="{{cssClass}} font-sans flex flex-col" autocomplete="off">
 
-    <header >{{!-- Sheet Header --}}
-        <img  src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="{{actor.name}}" class="w-32 h-32 rounded-full object-cover object-center border-2 border-ww-purple hover:border-ww-silver"/>
-        <div >
-            <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "WW.ActorName"}}" class="!font-serif !text-3xl"/>
-            <div >{{!-- Attributes --}}
-                {{#each system.attributes as |attribute key|}}
-                <div >
-                    <label for="system.attributes.{{key}}.value" >{{attribute.label}}</label>
-                    <div >
-                        <input type="number" name="system.attributes.{{key}}.value" value="{{attribute.value}}" min="0" data-dtype="Number"/>
-                        <a  data-roll="d20+@attributes.{{key}}.mod[modifier]@boons[boons]" data-label="{{attribute.label}}" title="Roll {{attribute.label}}">{{numberFormat attribute.mod decimals=0 sign=true}}</a>
-                    </div>
-                </div>
-                {{/each}}
+    {{!-- Sheet Header --}}
+    <header class="grid grid-cols-2 gap-4">
+
+        <div class="flex flex-col gap-2">
+            <div>
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize " WW.ActorName"}}"
+                    class="!font-serif !text-xl italic !text-center" />
             </div>
-            <div >
-                <div >{{!-- Defense --}}
-                    <label for="system.stats.defense.total" >{{localize "WW.Defense"}}</label>
-                    <div>{{system.stats.defense.total}} <a  title="Edit Defense"><i ></i></a></div>  
-                </div>
-                <div >{{!-- Damage / Health --}}
-                    <label for="system.stats.health.total" >{{localize "WW.Damage"}} / {{localize "WW.Health.Title"}}</label>
-                    <div >
-                        <input type="number" name="system.stats.damage.value" value="{{system.stats.damage.value}}" min="0" data-dtype="Number"/>
-                        <span class"ml-1">/ {{system.stats.health.total}} <a  title="Edit Health"><i ></i></a></span>
+
+
+            <div class="grid grid-cols-2 gap-2">
+                {{!-- Portrait --}}
+                <img src="{{actor.img}}" data-edit="img"
+                    class="w-32 h-32 rounded-full object-cover object-center border-2 border-ww-orchid hover:border-ww-purple" />
+
+                {{!-- Attributes --}}
+                <div class="grid grid-cols-2 gap-2 my-auto align-middle">
+                    {{#each system.attributes as |attribute key|}}
+                    <div>
+                        <label for="system.attributes.{{key}}.value"
+                            class="font-semibold uppercase !text-xs">{{attribute.label}}</label>
+                        <div class="flex items-center">
+                            <input type="number" name="system.attributes.{{key}}.value" value="{{attribute.value}}"
+                                min="0" data-dtype="Number" class="!w-10 !rounded-r-none" />
+                            <a data-roll="d20+@attributes.{{key}}.mod[modifier]@boons[boons]"
+                                data-label="{{attribute.label}}" title="Roll {{attribute.label}}"
+                                class="rollable font-bold text-ww-purple bg-ww-orchid p-1.5 rounded-r-md hover:bg-ww-purple hover:text-white">{{numberFormat
+                                attribute.mod decimals=0 sign=true}}</a>
+                        </div>
                     </div>
-                </div>
-                <div >{{!-- Bonus Damage --}}
-                    <label for="system.stats.bonusdamage.value" >{{localize "WW.BonusDamage"}}</label>
-                    <div><input type="number" name="system.stats.bonusdamage.value" value="{{system.stats.bonusdamage.value}}" data-dtype="Number" min="0" placeholder="#" />d6</div>
-                </div>
-                <div >
-                    <label>{{localize "WW.Luck"}}</label>
-                    <div><a  title="Roll {{localize "WW.Luck"}}"><i  data-label="Luck"></i></a></div>
+                    {{/each}}
                 </div>
             </div>
+        </div>
+
+
+
+        {{!-- Defense --}}
+        <div class="bg-ww-silver/25 p-2 rounded-md flex flex-col gap-2 h-full justify-between">
+            <div class="flex">
+                <label for="system.stats.defense.total" class="font-semibold uppercase !text-xs">{{localize
+                    "WW.Defense"}}</label>
+                <div>{{system.stats.defense.total}} <a title="Edit Defense"><i></i></a></div>
+            </div>
+            {{!-- Damage / Health --}}
+            <div class="flex">
+                <label for="system.stats.health.total" class="font-semibold uppercase !text-xs">{{localize "WW.Damage"}}
+                    / {{localize
+                    "WW.Health.Title"}}</label>
+                <div class="flex">
+                    <input type="number" name="system.stats.damage.value" value="{{system.stats.damage.value}}" min="0"
+                        data-dtype="Number" />
+                    <span class="ml-1">/ {{system.stats.health.total}}
+                        <a title="Edit Health" class="health-edit"><i class="fas fa-edit"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            {{!-- Bonus Damage --}}
+            <div class="flex">
+                <label for="system.stats.bonusdamage.value" class="font-semibold uppercase !text-xs">{{localize
+                    "WW.BonusDamage"}}</label>
+                <div class="flex">
+                    <input type="number" name="system.stats.bonusdamage.value"
+                        value="{{system.stats.bonusdamage.value}}" data-dtype="Number" min="0" placeholder="#" />d6
+                </div>
+            </div>
+            <div class="flex w-full">
+
+                <a title="Roll {{localize " WW.Luck"}}"
+                    class="rollable w-full text-center font-bold text-ww-purple bg-ww-orchid p-1.5 rounded-md hover:bg-ww-purple hover:text-white">
+                    <i class="large fas fa-clover" data-label="Luck"></i> {{localize "WW.Luck"}}
+                </a>
+
+            </div>
+        </div>
         </div>
     </header>
 
@@ -46,7 +86,7 @@
         <a data-tab="equipment">{{localize "WW.Equipment"}}</a>
         <a data-tab="talents">{{localize "WW.Talents"}}</a>
         <a data-tab="spells">{{localize "WW.Spells"}}</a>
-        {{!--<a  data-tab="afflictions">{{localize "WW.Afflictions"}}</a>--}}
+        {{!--<a data-tab="afflictions">{{localize "WW.Afflictions"}}</a>--}}
         <a data-tab="effects">{{localize "WW.Effects"}}</a>
     </nav>
 
@@ -84,7 +124,7 @@
         </div>
 
         {{!-- Afflictions Tab --}}
-        {{!-- <div  data-group="primary" data-tab="afflictions">
+        {{!-- <div data-group="primary" data-tab="afflictions">
             {{> "systems/weirdwizard/templates/actors/parts/Character-afflictions.hbs"}}
         </div>
         --}}
