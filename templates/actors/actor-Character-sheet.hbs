@@ -2,16 +2,19 @@
 
     {{!-- Sheet Header --}}
     <header class="grid grid-cols-2 gap-4">
+
+        {{!-- Left Column --}}
         <div class="flex flex-col gap-2">
+            {{!-- Name --}}
             <div>
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize " WW.ActorName"}}"
-                    class="!font-serif !text-xl italic !text-center !border-b-2 !border-ww-purple" />
+                    class="!font-serif !text-xl italic !text-center !border-b-2 !border-ww-purple !py-1" />
             </div>
 
             <div class="grid grid-cols-2 gap-2">
                 {{!-- Portrait --}}
                 <img src="{{actor.img}}" data-edit="img"
-                    class="w-32 h-32 bg-ww-orchid rounded-full object-cover object-center border-2 border-ww-purple hover:border-white" />
+                    class="w-32 h-32 bg-ww-orchid rounded-full object-cover object-center border-4 border-white hover:border-ww-purple shadow-lg" />
 
                 {{!-- Attributes --}}
                 <div class="grid grid-cols-2 gap-3 my-auto align-middle">
@@ -20,7 +23,7 @@
                         <label for="system.attributes.{{key}}.value">{{attribute.label}}</label>
                         <div class="flex items-center">
                             <input type="number" name="system.attributes.{{key}}.value" value="{{attribute.value}}"
-                                min="0" data-dtype="Number" class="!w-10 !rounded-r-none" />
+                                min="0" data-dtype="Number" class="!w-12 !rounded-r-none" />
                             <a data-roll="d20+@attributes.{{key}}.mod[modifier]@boons[boons]"
                                 data-label="{{attribute.label}}" title="Roll {{attribute.label}}"
                                 class="rollable button !rounded-l-none">{{numberFormat
@@ -32,55 +35,66 @@
             </div>
         </div>
 
-        {{!-- Defense --}}
-        <div
-            class="bg-ww-silver/30 border border-b-2 border-solid border-ww-purple  p-2 rounded-md flex flex-col gap-2 h-full justify-between">
-            <div class="flex">
-                <label for="system.stats.defense.total">{{localize
-                    "WW.Defense"}}</label>
-                <div>{{system.stats.defense.total}} <a title="Edit Defense"><i></i></a></div>
-            </div>
-            {{!-- Damage / Health --}}
-            <div class="flex">
-                <label for="system.stats.health.total">{{localize "WW.Damage"}}
-                    / {{localize
-                    "WW.Health.Title"}}</label>
-                <div class="flex">
-                    <input type="number" name="system.stats.damage.value" value="{{system.stats.damage.value}}" min="0"
-                        data-dtype="Number" />
-                    <span class="ml-1">/ {{system.stats.health.total}}
-                        <a title="Edit Health" class="health-edit"><i class="fas fa-edit"></i>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            {{!-- Bonus Damage --}}
-            <div class="flex">
-                <label for="system.stats.bonusdamage.value">{{localize "WW.BonusDamage"}}</label>
-                <div class="flex">
-                    <input type="number" name="system.stats.bonusdamage.value"
-                        value="{{system.stats.bonusdamage.value}}" data-dtype="Number" min="0" placeholder="#" />d6
-                </div>
-            </div>
-            <div class="flex w-full">
+        {{!-- Right Column --}}
+        <div class="flex flex-col gap-1 justify-between">
+            {{!-- Defense --}}
+            <div class="flex py-1.5 px-2 items-center rounded-md bg-slate-600 text-white">
+                <label for="system.stats.defense.total" class="grow">
+                    {{localize "WW.Defense"}}
+                </label>
 
-                <a title="Roll {{localize " WW.Luck"}}" class="rollable button w-full">
+                <div class="font-bold text-xl">
+                    <a title="Edit Defense" class="defense-edit grow">{{system.stats.defense.total}}</a>
+                </div>
+            </div>
+
+            {{!-- Damage / Health --}}
+            <div class="flex py-1.5 px-2 items-center rounded-md bg-red-900 text-white">
+                <label for="system.stats.health.total" class="grow">
+                    {{localize "WW.Damage"}} / {{localize "WW.Health.Title"}}
+                </label>
+
+                <div class="flex gap-1 text-xl items-center font-bold">
+                    <input type="number" name="system.stats.damage.value" value="{{system.stats.damage.value}}" min="0"
+                        data-dtype="Number" class="!bg-red-800 !text-white !w-14 !px-1 !py-0.5" />
+                    <span class="text-red-300"><a title="Edit Health" class="health-edit">/
+                            {{system.stats.health.total}}</a></span>
+                </div>
+            </div>
+
+            {{!-- Bonus Damage --}}
+            <div class="flex py-1.5 px-2 items-center rounded-md bg-emerald-900 text-white">
+                <label for="system.stats.bonusdamage.value" class="grow">{{localize "WW.BonusDamage"}}</label>
+                <div class="flex gap-1 text-xl items-center font-bold">
+                    <input type="number" name="system.stats.bonusdamage.value"
+                        value="{{system.stats.bonusdamage.value}}" data-dtype="Number" min="0" placeholder="#"
+                        class="!bg-emerald-800 !text-white !w-16 !px-1 !py-0.5" />
+                    <span class="text-emerald-300">d6</span>
+                </div>
+            </div>
+
+            {{!-- Luck Roll --}}
+            <div class="flex w-full">
+                <a class="rollable button w-full">
                     <i class="large fas fa-clover" data-label="Luck"></i> {{localize "WW.Luck"}}
                 </a>
-
             </div>
         </div>
     </header>
 
     {{!-- Sheet Tab Navigation --}}
-    <nav data-group="primary" class="sheet-tabs">
-        <a data-tab="summary">{{localize "WW.Summary"}}</a>
-        <a data-tab="stats">{{localize "WW.Stats"}}</a>
-        <a data-tab="details">{{localize "WW.Details"}}</a>
-        <a data-tab="equipment">{{localize "WW.Equipment"}}</a>
-        <a data-tab="talents">{{localize "WW.Talents"}}</a>
-        <a data-tab="spells">{{localize "WW.Spells"}}</a>
-        <a data-tab="effects">{{localize "WW.Effects"}}</a>
+    <nav data-group="primary"
+        class="sheet-tabs flex my-4 justify-evenly font-serif font-bold text-sm border-none items-center text-center">
+        <a data-tab="summary" class="w-full py-1 px-0.5 bg-ww-purple text-white rounded-l-md text-center">{{localize
+            "WW.Summary"}}</a>
+        <a data-tab="stats" class="w-full py-1 px-0.5 bg-ww-orchid text-center">{{localize "WW.Stats"}}</a>
+        <a data-tab="details" class="w-full py-1 px-0.5 bg-ww-orchid text-center">{{localize "WW.Details"}}</a>
+        <a data-tab="equipment" class="w-full py-1 px-0.5 bg-ww-orchid text-center">{{localize "WW.Equipment"}}</a>
+        <a data-tab="talents" class="w-full py-1 px-0.5 bg-ww-orchid text-center">{{!-- localize "WW.Talents"
+            --}}Talents</a>
+        <a data-tab="spells" class="w-full py-1 px-0.5 bg-ww-orchid text-center ">{{localize "WW.Spells"}}</a>
+        <a data-tab="effects" class="w-full py-1 px-0.5 bg-ww-orchid rounded-r-md text-center">{{localize
+            "WW.Effects"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}

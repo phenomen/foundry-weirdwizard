@@ -1,60 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 
 @tailwind components;
 @tailwind utilities;
 
 :root {
-	--color-shadow-primary: #dbd3dc;
-	--color-shadow-highlight: #dbd3dc;
+  --color-shadow-primary: #dbd3dc;
+  --color-shadow-highlight: #dbd3dc;
 }
 
 .weirdwizard * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar-thumb {
-	@apply rounded-none bg-ww-purple border-none;
+  @apply rounded-none bg-ww-purple border-none;
 }
 ::-webkit-scrollbar-track {
-	@apply rounded-none;
+  @apply rounded-none;
+}
+
+.paper {
+  background-image: url(../assets/images/paper.webp);
+  background-size: cover;
+  background-position: center;
 }
 
 .weirdwizard h1,
 .weirdwizard h2,
 .weirdwizard h3 {
-	@apply font-serif font-bold uppercase border-none;
+  @apply font-serif font-bold uppercase border-none;
 }
 
 .weirdwizard label {
-	@apply font-semibold uppercase text-xs;
+  @apply font-semibold uppercase text-xs;
 }
 
 .weirdwizard input,
-.weirdwizard input[type='text'],
-.weirdwizard input[type='number'],
-.weirdwizard input[type='password'],
-.weirdwizard input[type='date'],
-.weirdwizard input[type='time'],
-.weirdwizard input[type='search'] {
-	@apply h-auto p-1.5 border-transparent rounded-md bg-white font-sans font-bold text-ww-purple focus:bg-ww-purple focus:text-white;
+.weirdwizard input[type="text"],
+.weirdwizard input[type="number"],
+.weirdwizard input[type="password"],
+.weirdwizard input[type="date"],
+.weirdwizard input[type="time"],
+.weirdwizard input[type="search"] {
+  @apply h-auto p-1.5 border-transparent rounded-md bg-white font-sans font-bold text-ww-purple focus:bg-ww-orchid;
 }
 
 .weirdwizard input:focus,
-.weirdwizard input[type='text']:focus,
-.weirdwizard input[type='number']:focus,
-.weirdwizard input[type='password']:focus,
-.weirdwizard input[type='date']:focus,
-.weirdwizard input[type='time']:focus,
-.weirdwizard input[type='search']:focus {
-	@apply shadow-none;
+.weirdwizard input[type="text"]:focus,
+.weirdwizard input[type="number"]:focus,
+.weirdwizard input[type="password"]:focus,
+.weirdwizard input[type="date"]:focus,
+.weirdwizard input[type="time"]:focus,
+.weirdwizard input[type="search"]:focus {
+  @apply shadow-none;
 }
 
 .weirdwizard a.rollable.button {
-	@apply p-1.5 rounded-md font-bold text-center bg-ww-purple text-ww-orchid hover:text-white;
+  @apply p-1.5 rounded-md font-bold text-center border border-solid border-ww-purple bg-ww-purple text-ww-orchid hover:text-white;
 }
 
-.weirdwizard.sheet.actor > section {
-	background-image: url(../assets/images/paper.webp);
-	background-size: cover;
-	background-position: center;
+.weirdwizard.sheet.actor > section,
+.weirdwizard.sheet.item > section {
+  @apply paper;
+}
+
+.weirdwizard.sheet nav.sheet-tabs {
+  @apply border-none my-2;
 }
