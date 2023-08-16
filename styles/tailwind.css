@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 :root {
-	--color-shadow-primary: #ffffff;
-	--color-shadow-highlight: #ffffff;
+	--color-shadow-primary: #dbd3dc;
+	--color-shadow-highlight: #dbd3dc;
 }
 
 .weirdwizard * {
@@ -25,6 +25,10 @@
 	@apply font-serif font-bold uppercase border-none;
 }
 
+.weirdwizard label {
+	@apply font-semibold uppercase text-xs;
+}
+
 .weirdwizard input,
 .weirdwizard input[type='text'],
 .weirdwizard input[type='number'],
@@ -32,7 +36,7 @@
 .weirdwizard input[type='date'],
 .weirdwizard input[type='time'],
 .weirdwizard input[type='search'] {
-	@apply h-auto p-1.5 border-none rounded-md bg-white font-sans font-bold text-ww-purple focus:bg-ww-purple focus:text-white;
+	@apply h-auto p-1.5 border-transparent rounded-md bg-white font-sans font-bold text-ww-purple focus:bg-ww-purple focus:text-white;
 }
 
 .weirdwizard input:focus,
@@ -45,6 +49,12 @@
 	@apply shadow-none;
 }
 
+.weirdwizard a.rollable.button {
+	@apply p-1.5 rounded-md font-bold text-center bg-ww-purple text-ww-orchid hover:text-white;
+}
+
 .weirdwizard.sheet.actor > section {
-	@apply !bg-none !bg-gray-100;
+	background-image: url(../assets/images/paper.webp);
+	background-size: cover;
+	background-position: center;
 }

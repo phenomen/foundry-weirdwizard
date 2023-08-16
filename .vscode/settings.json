@@ -1,0 +1,8 @@
+{
+    "inlineFold.supportedLanguages": [
+        "html",
+        "javascript",
+        "typescript",
+        "handlebars"
+    ]
+}
