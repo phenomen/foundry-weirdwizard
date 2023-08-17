@@ -59,6 +59,13 @@
       "folders": []
     }
   ],
+  "hotReload": true,
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "html", "hbs", "json"],
+      "paths": ["templates/", "styles/", "lang/"]
+    }
+  },
   "initiative": "1d20",
   "gridDistance": 1,
   "gridUnits": "yard",
